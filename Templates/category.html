@@ -35,6 +35,33 @@ Something Else
             {{category.desc}}
         </p>
     </div>
+    <div>
+        <img src="{% static 'img/banner.jpg' %}">
+    </div>
+    <div>
+        <h3>Products</h3>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nibh at sem vulputate semper eget vel
+            justo. Aliquam eleifend est vitae tristique commodo. Proin erat est, pulvinar quis fringilla sit amet,
+        </p>
+    </div>
     {% endif %}
+
+    <div>
+        {% for product in products %}
+        <div>
+
+            <a href=""><img alt="{{product.name}}" src="{{product.img.url}}"></a>
+        </div>
+        <div>
+            <h2>{{product.name}}</h2>
+            <h4>{{product.price}}</h4>
+            <p>{{product.desc}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
+
+
 {% endblock %}
