@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static  %}
+
+{% block metadescription %}
+{% if category %}
+{{ category.description | truncateword:155 }}
+{% else %}
+ABC Store.
+{% endif %}
+{% endblock %}
+{% block title %}
+
+{% if category %}
+{{ category.name }} . ABC store
+{% else %}
+Something Else
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if category %}
+<div>
+    <div>
+        <p><a href="{% url 'ecom:ProCat' %}">Category</a></p>
+    </div>
+</div>
+{% endif %}
+<div>
+    {% if category %}
+    <img alt="{{category.name}}" src="{{category.img.url}}">
+    <div>
+        <h2>
+            {{category.name}}
+        </h2>
+        <p>
+            {{category.desc}}
+        </p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
