@@ -3,6 +3,6 @@ from django.urls import path
 
 app_name = 'ecom'
 urlpatterns = [
-    path('', views.ProCat, name='ProCat'),
-    path('<slug:c_slug>/',views.ProCat, name='ProByCat')
+    path('', views.procat, name='ProCat'),
+    path('<slug:c_slug>/', views.procat, name='ProByCat')
 ]

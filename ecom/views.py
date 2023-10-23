@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 
 
 # Create your views here.
 
-def ProCat(request, c_slug=None):
+def procat(request, c_slug=None):
     c_page = None
     products = None
     if c_slug != None:

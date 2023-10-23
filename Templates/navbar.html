@@ -1,8 +1,8 @@
 <nav>
     <ul>
-        <li><a href=" {% url 'ecom:ProCat' %}">Category</a></li>
+        <li><a href="{% url 'ecom:ProCat' %}">Category</a></li>
         {% for cat in links %}
-        <li><a href=" {{cat.get_url}}">Product</a></li>
+        <li><a href="{{cat.get_url}}">Product</a></li>
         {% endfor %}
         <li>Cart</li>
     </ul>
