@@ -1,68 +1,70 @@
 {% extends 'base.html' %}
-{% load static  %}
+{% load static %}
 
 {% block metadescription %}
-    {% if category %}
-        {{ category.description|truncatewords:155 }}
-    {% else %}
-        ABC Store.
-    {% endif %}
+{% if category %}
+{{ category.desc|truncatewords:155 }}
+{% else %}
+ABC Store.
+{% endif %}
 {% endblock %}
 
 {% block title %}
-    {% if category %}
-        {{category.name}}
-    {% else %}
-        Something Else
-    {% endif %}
+{% if category %}
+{{category.name}}
+{% else %}
+Something Else
+{% endif %}
 {% endblock %}
 
 {% block content %}
 {% if category %}
 <div>
-    <div>
-        <p><a href="{% url 'ecom:ProCat' %}">Category</a></p>
-    </div>
+  <div>
+    <p><a href="{% url 'ecom:ProCat' %}">Category</a></p>
+  </div>
 </div>
 {% endif %}
 <div>
-    {% if category %}
-    <img alt="{{category.name}}" src="{{category.img.url}}">
-    <div>
-        <h2>
-            {{category.name}}
-        </h2>
-        <p>
-            {{category.desc}}
-        </p>
-    </div>
-    <div>
-        <img src="{% static 'img/banner.jpg' %}">
-    </div>
-    <div>
-        <h3>Products</h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nibh at sem vulputate semper eget vel
-            justo. Aliquam eleifend est vitae tristique commodo. Proin erat est, pulvinar quis fringilla sit amet,
-        </p>
-    </div>
-    {% endif %}
+  {% if category %}
+  <img alt="{{category.name}}" src="{{category.img.url}}">
+  <div>
+    <h2>
+      {{category.name}}
+    </h2>
+    <p>
+      {{category.desc}}
+    </p>
+  </div>
+  {% else %}
+  <div>
+    <img src="{% static 'img/banner.jpg' %}" width="100%">
+  </div>
+  <div>
+    <h3>Products</h3>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nibh
+      at sem vulputate semper eget vel
+      justo. Aliquam eleifend est vitae tristique commodo. Proin erat est,
+      pulvinar quis fringilla sit amet,
+    </p>
+  </div>
+  {% endif %}
 
+  <div>
+    {% for product in products %}
     <div>
-        {% for product in products %}
-        <div>
 
-            <a href=""><img alt="{{product.name}}" src="{{product.img.url}}"></a>
-        </div>
-        <div>
-            <h2>{{product.name}}</h2>
-            <h4>{{product.price}}</h4>
-            <p>{{product.desc}}</p>
-        </div>
-        {% endfor %}
+      <a href><img alt="{{product.name}}" src="{{product.img.url}}"></a>
     </div>
+    <div>
+      <h2>{{product.name}}</h2>
+      <h4>{{product.price}}</h4>
+      <p>{{product.desc}}</p>
+    </div>
+    {% endfor %}
+  </div>
 
 </div>
-
 
 {% endblock %}
