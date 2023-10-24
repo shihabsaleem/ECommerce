@@ -2,21 +2,21 @@
 {% load static  %}
 
 {% block metadescription %}
-{% if category %}
-{{ category.description|truncatewords:155 }}
-
-{% else %}
-ABC Store.
-{% endif %}
+    {% if category %}
+        {{ category.description|truncatewords:155 }}
+    {% else %}
+        ABC Store.
+    {% endif %}
 {% endblock %}
+
 {% block title %}
-
-{% if category %}
-{{ category.name }} . ABC store
-{% else %}
-Something Else
-{% endif %}
+    {% if category %}
+        {{category.name}}
+    {% else %}
+        Something Else
+    {% endif %}
 {% endblock %}
+
 {% block content %}
 {% if category %}
 <div>
