@@ -13,3 +13,4 @@ def procat(request, c_slug=None):
     else:
         products = Product.objects.all().filter(available=True)
     return render(request, 'category.html', {'c_page': c_page, 'products': products})
+
