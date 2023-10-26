@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+
+{{ product.desc|truncatewords:155 }}
+
+{% endblock %}
+
+{% block title %}
+{% if category %}
+{{product.name}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <img alt="{{product.name}}" src="{{product.img.url}}">
+    </div>
+</div>
+<div>
+    <div>
+        <h1>{{product.name}}</h1>
+        </h3>$ {{product.price}}</h3>
+        <h5>Description</h5>
+        <p>{{product.desc}}</p>
+    {% if product.stock <= 0 %}
+        <h5>Out of Stock</h5>
+    {% else %}
+        <a href="">Add to Cart</a>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
