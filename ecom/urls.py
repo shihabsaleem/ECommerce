@@ -5,4 +5,5 @@ app_name = 'ecom'
 urlpatterns = [
     path('', views.procat, name='ProCat'),
     path('<slug:c_slug>/', views.procat, name='ProByCat'),
+    path('<slug:c_slug>/<slug:product_slug>/', views.proDetail, name='ProCatDetail'),
 ]

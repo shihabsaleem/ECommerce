@@ -25,11 +25,11 @@
         </h3>$ {{product.price}}</h3>
         <h5>Description</h5>
         <p>{{product.desc}}</p>
-    {% if product.stock <= 0 %}
+        {% if product.stock <= 0 %}
         <h5>Out of Stock</h5>
-    {% else %}
+        {% else %}
         <a href="">Add to Cart</a>
-    {% endif %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
