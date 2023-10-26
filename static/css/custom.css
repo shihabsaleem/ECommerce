@@ -1,0 +1,22 @@
+.nav-item{
+font-size:1rem;
+text-transform:uppercase;
+font-weight:500
+}
+.navbar-light .navbar-nav .nav-link{
+color: #f4a22c;
+letter-spacing:.2rem;
+}
+.center{
+display:flex;
+align-item:center;
+justify-content:center;
+}
+nav{
+display:flex;
+align-item:center;
+justify-content:center;
+}
+.center > p{
+color : #f4a22c
+}
