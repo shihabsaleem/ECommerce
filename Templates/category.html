@@ -3,7 +3,7 @@
 
 {% block metadescription %}
 {% if category %}
-{{category.desc | truncatewords:155}}
+{{ category.desc | truncatewords:155 }}
 {% else %}
 ABC Store.
 {% endif %}
@@ -11,60 +11,53 @@ ABC Store.
 
 {% block title %}
 {% if category %}
-{{category.name}}
+{{ category.name }}
 {% else %}
 Something Else
 {% endif %}
 {% endblock %}
 
 {% block content %}
-{% if category %}
-<div>
-  <div>
-    <p><a href="{% url 'ecom:ProCat' %}">Category</a></p>
-  </div>
-</div>
-{% endif %}
-<div>
-  {% if category %}
-  <img alt="{{category.name}}" src="{{category.img.url}}">
-  <div>
-    <h2>
-      {{category.name}}
-    </h2>
-    <p>
-      {{category.desc}}
-    </p>
-  </div>
-  {% else %}
-  <div>
-    <img src="{% static 'img/banner.jpg' %}" width="100%">
-  </div>
-  <div>
-    <h3>Products</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nibh
-      at sem vulputate semper eget vel
-      justo. Aliquam eleifend est vitae tristique commodo. Proin erat est,
-      pulvinar quis fringilla sit amet,
-    </p>
-  </div>
-  {% endif %}
-
-  <div>
-    {% for product in products %}
-    <div>
-
-      <a href="{{product.get_url}}"><img alt="{{product.name}}" width="auto" height="250px" src="{{product.img.url}}"></a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            {% if category %}
+            <a href="{% url 'ecom:ProCat' %}" class="btn btn-link">Category</a>
+            <img alt="{{ category.name }}" class="img-fluid cat-image" src="{{ category.img.url }}">
+            <h2 class="text-center title-1">{{ category.name }}</h2>
+            <p class="text-justify">{{ category.desc }}</p>
+            {% else %}
+            <img src="{% static 'img/banner.jpeg' %}" class="img-fluid" width="100%">
+            <h3 class="text-center title-1">Products</h3>
+            <p class="text-justify">
+                {{ category.name }}123
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nibh
+                at sem vulputate semper eget vel
+                justo. Aliquam eleifend est vitae tristique commodo. Proin erat est,
+                pulvinar quis fringilla sit amet,
+            </p>
+            {% endif %}
+        </div>
     </div>
-    <div>
-      <h2>{{product.name}}</h2>
-      <h4>{{product.price}}</h4>
-      <p>{{product.desc}}</p>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img alt="{{ product.name }}" class="card-img-top" src="{{ product.img.url }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.price }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ product.desc }}</li>
+                </ul>
+                <div class="card-body">
+                    <a class="btn btn-primary" href="{{ product.get_url }}">View</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-
 </div>
-
 {% endblock %}

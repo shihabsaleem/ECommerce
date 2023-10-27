@@ -5,7 +5,10 @@ font-weight:500
 }
 .navbar-light .navbar-nav .nav-link{
 color: #f4a22c;
-letter-spacing:.2rem;
+letter-spacing:.1rem;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+color:black;
 }
 .center{
 display:flex;
@@ -19,4 +22,19 @@ justify-content:center;
 }
 .center > p{
 color : #f4a22c
+}
+
+
+/** category **/
+.row-class-1{
+padding-top:2rem;
+}
+.row-class-1 .mx-auto{
+color:black;
+font-size:1.5rem;
+}
+
+.cat-image{
+weight:auto;
+height:200px;
 }
