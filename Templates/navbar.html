@@ -27,9 +27,9 @@
                 <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i> ()</a>
             </li>
         </ul>
-        <form action="" class="d-flex" method="get">
+        <form action="{% url 'searchapp:searchResult' %}" class="d-flex" method="get">
             {% csrf_token %}
-            <input class="form-control me-2" placeholder="Search" type="search">
+            <input class="form-control me-2" placeholder="Search" name="q" type="search">
             <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i> </button>
         </form>
     </div>

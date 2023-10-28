@@ -3,5 +3,49 @@
 {% load static %}  <!-- Load the static template tags for serving static files -->
 
 {% block metadescription %}  <!-- Define the block for meta description -->
-abc
+abc  <!-- Set a default meta description -->
 {% endblock %}  <!-- End the block for meta description -->
+
+{% block title %}
+Search  Result for {{query}}
+{% endblock %}
+
+{% block content %}  <!-- Define the block for the main content -->
+
+<div>
+    <p class="text-center my-search">
+        you have searched for "{{query}}"
+    </p>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for product in products %}  <!-- Iterate through the products -->
+        <div class="col-md-3">
+            <a class="card-a" href="{{ product.get_url }}">  <!-- Link to the product detail page -->
+                <div class="card mb-3">
+                    <img alt="{{ product.name }}" class="card-img-top cat-image" src="{{ product.img.url }}">
+                    <!-- Display product image -->
+                    <div class="card-body">
+                        <h5 class="card-title h-justify">{{product.name}}</h5>  <!-- Display product name -->
+                        <p class="card-text text-justify"><span>$</span> {{product.price}}</p>
+                        <!-- Display product price -->
+                    </div>
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item text-justify">{{product.desc}}</li>
+                        <!-- Display product description -->
+                    </ul>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="row mx-auto">
+            <p class="my-search text-center">
+                0 Result(s) found !
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}  <!-- End the block for the main content -->
