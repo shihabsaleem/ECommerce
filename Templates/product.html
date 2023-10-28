@@ -1,35 +1,39 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %}  <!-- Extend the 'base.html' template -->
 
-{% block metadescription %}
+{% load static %}  <!-- Load the static template tags for serving static files -->
 
-{{ product.desc|truncatewords:155 }}
-
-{% endblock %}
+{% block metadescription %}  <!-- Define the block for meta description -->
+{{ product.desc|truncatewords:155 }}  <!-- Display a truncated product description as the meta description -->
+{% endblock %}  <!-- End the block for meta description -->
 
 {% block title %}
 {% if category %}
-{{product.name}}
+{{ product.name }}
 {% endif %}
-{% endblock %}
+{% endblock %}  <!-- End the block for the page title -->
 
-{% block content %}
-<div>
-    <div>
-        <img alt="{{product.name}}" src="{{product.img.url}}">
+{% block content %}  <!-- Define the block for the main content -->
+
+<div class="container-fluid m-0">
+    <div class="row m-3">
+        <div class="col-md-6">
+            <img alt="{{ product.name }}" class="img-fluid" src="{{ product.img.url }}">
+            <!-- Display the product image -->
+        </div>
+        <div class="col-md-6">
+            <h3 class="h-product mb-2">{{ product.name }}</h3>  <!-- Display the product name -->
+            <h6 class="h-price mb-3">$ {{ product.price }}</h6>  <!-- Display the product price -->
+
+            <h6 class="h-desc">Description</h6>
+            <p class="h-descp">{{ product.desc }}</p>  <!-- Display the product description -->
+
+            {% if product.stock <= 0 %}  <!-- Check if the product is out of stock -->
+            <h5>Out of Stock</h5>  <!-- Display an "Out of Stock" message -->
+            {% else %}
+            <a class="btn btn-primary" href="#">Add to Cart</a>  <!-- Display an "Add to Cart" button -->
+            {% endif %}
+        </div>
     </div>
 </div>
-<div>
-    <div>
-        <h1>{{product.name}}</h1>
-        </h3>$ {{product.price}}</h3>
-        <h5>Description</h5>
-        <p>{{product.desc}}</p>
-        {% if product.stock <= 0 %}
-        <h5>Out of Stock</h5>
-        {% else %}
-        <a href="">Add to Cart</a>
-        {% endif %}
-    </div>
-</div>
-{% endblock %}
+
+{% endblock %}  <!-- End the block for the main content -->

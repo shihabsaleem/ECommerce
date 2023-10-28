@@ -1,63 +1,80 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %}  <!-- Extend the 'base.html' template -->
 
-{% block metadescription %}
-{% if category %}
-{{ category.desc | truncatewords:155 }}
-{% else %}
+{% load static %}  <!-- Load the static template tags for serving static files -->
+
+{% block metadescription %}  <!-- Define the block for meta description -->
+{% if category %}  <!-- Check if 'category' exists -->
+{{ category.desc | truncatewords:155 }}  <!-- Display category description, truncated to 155 words -->
+{% else %}  <!-- If no 'category' exists, display a default description -->
 ABC Store.
 {% endif %}
-{% endblock %}
+{% endblock %}  <!-- End the block for meta description -->
 
 {% block title %}
 {% if category %}
-{{ category.name }}
+{{ category.name }} abc
 {% else %}
 Something Else
 {% endif %}
-{% endblock %}
+{% endblock %}  <!-- End the block for the page title -->
 
-{% block content %}
+{% block content %}  <!-- Define the block for the main content -->
+
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mx-auto">
-            {% if category %}
-            <a href="{% url 'ecom:ProCat' %}" class="btn btn-link">Category</a>
+        <div class="col-md-12">
+            {% if category %}  <!-- Check if 'category' exists -->
+            <a class="btn btn-link" href="{% url 'ecom:ProCat' %}">Category</a>  <!-- Link to the category page -->
             <img alt="{{ category.name }}" class="img-fluid cat-image" src="{{ category.img.url }}">
-            <h2 class="text-center title-1">{{ category.name }}</h2>
-            <p class="text-justify">{{ category.desc }}</p>
+            <!-- Display category image -->
+            <h2 class="text-center title-1">{{ category.name }}</h2>  <!-- Display the category name -->
+            <p class="text-justify">{{ category.desc }}</p>  <!-- Display the category description -->
             {% else %}
-            <img src="{% static 'img/banner.jpeg' %}" class="img-fluid" width="100%">
-            <h3 class="text-center title-1">Products</h3>
-            <p class="text-justify">
-                {{ category.name }}123
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nibh
-                at sem vulputate semper eget vel
-                justo. Aliquam eleifend est vitae tristique commodo. Proin erat est,
-                pulvinar quis fringilla sit amet,
+            <img class="img-fluid" src="{% static 'img/banner.jpeg' %}" width="100%">
+            <!-- Display a default banner image -->
+            <h3 class="text-center title-1">Products</h3>  <!-- Display a default title -->
+            <p class="text-justify ">
+                {{ category.name }}123  <!-- Display a placeholder text -->
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...  <!-- Display a placeholder text -->
             </p>
             {% endif %}
         </div>
     </div>
+</div>
 
+<div class="container">
     <div class="row">
-        {% for product in products %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <img alt="{{ product.name }}" class="card-img-top" src="{{ product.img.url }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.price }}</p>
+        {% for product in products.object_list %}  <!-- Iterate through the products -->
+        <div class="col-md-3">
+            <a class="card-a" href="{{ product.get_url }}">  <!-- Link to the product detail page -->
+                <div class="card mb-3">
+                    <img alt="{{ product.name }}" class="card-img-top cat-image" src="{{ product.img.url }}">
+                    <!-- Display product image -->
+                    <div class="card-body">
+                        <h5 class="card-title h-justify">{{ product.name }}</h5>  <!-- Display product name -->
+                        <p class="card-text text-justify"><span>$</span> {{ product.price }}</p>
+                        <!-- Display product price -->
+                    </div>
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item text-justify">{{ product.desc }}</li>
+                        <!-- Display product description -->
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ product.desc }}</li>
-                </ul>
-                <div class="card-body">
-                    <a class="btn btn-primary" href="{{ product.get_url }}">View</a>
-                </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>
+    <div class="mx-auto">
+        {% if products.paginator.num_pages > 1 %}  <!-- Check if there are multiple pages of products -->
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}  <!-- Iterate through the pages -->
+            <a class="btn btn-light btn-sm"
+               href="?page={{pg}} {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            <!-- Generate pagination links -->
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
 </div>
-{% endblock %}
+
+{% endblock %}  <!-- End the block for the main content -->
