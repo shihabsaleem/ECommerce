@@ -26,11 +26,12 @@ Cart
         </div>
     </div>
     <div class="row mx-auto">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th colspan="4">Items</th>
+                    <th colspan="2">Items</th>
+                    <th>Subtotal</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,16 +51,16 @@ Cart
                         Qty: {{ cart_item.quantity }} x ${{ cart_item.product.price }}
                     </td>
                     <td>
-                        ${{ cart_item.sub_total }}
+                        ${{cart_item.sub_total}}
                     </td>
                     <td>
                         {% if cart_item.quantity < cart_item.product.stock %}
                         <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa fa-plus"></i></a>
-                        <a href=""><i class="fa fa-minus"></i></a>
-                        <a href=""><i class="fa fa-trash"></i></a>
+                        <a href="{% url 'cart:cart_remove' cart_item.product.id %}"><i class="fa fa-minus"></i></a>
+                        <a href="{% url 'cart:full_remove' cart_item.product.id %}"><i class="fa fa-trash"></i></a>
                         {% else %}
-                        <a href=""><i class="fa fa-minus"></i></a>
-                        <a href=""><i class="fa fa-trash"></i></a>
+                        <a href="{% url 'cart:cart_remove' cart_item.product.id %}"><i class="fa fa-minus"></i></a>
+                        <a href="{% url 'cart:full_remove' cart_item.product.id %}"><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </td>
                 </tr>
@@ -67,7 +68,7 @@ Cart
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12 text-center">
+        <div class="col-md-6 text-center">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -77,6 +78,11 @@ Cart
                 <tbody>
                 <tr>
                     <td>Please review your shopping experience!</td>
+                </tr>
+                <tr>
+                    <td class="text-left">
+                        Grand Total : <b>{{total}}</b>
+                    </td>
                 </tr>
                 </tbody>
             </table>

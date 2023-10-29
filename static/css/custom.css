@@ -93,6 +93,6 @@ text-align:left;
     background-color: var(--bs-body-bg);
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
-    max-width:250px;
+    max-width:100px;
     height:auto;
 }
