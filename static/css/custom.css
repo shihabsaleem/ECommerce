@@ -28,6 +28,16 @@ padding-top:20px;
 }
 
 
+/*cart*/
+.cart-img{
+    padding: 0.25rem;
+    background-color: var(--bs-body-bg);
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    width:250px;
+    height:auto;
+}
+
 /** category **/
 .row-class-1{
 padding-top:2rem;

@@ -1,41 +1,36 @@
-{% extends 'base.html' %}  <!-- Extend the 'base.html' template -->
+{% extends 'base.html' %}
 
-{% load static %}  <!-- Load the static template tags for serving static files -->
+{% load static %}
 
-{% block metadescription %}  <!-- Define the block for meta description -->
+{% block metadescription %}
 Your Cart...
-{% endblock %}  <!-- End the block for meta description -->
-
-{% block title %}
-cart
 {% endblock %}
 
-{% block content %}  <!-- Define the block for the main content -->
-{% if not cart_items %}
-<div>
-    <div class="text-center">
-        <h3 class="text-center m-5">
-            Your Cart is Empty...
-        </h3>
-        <p class="text-center">
-            Please click <a href="{% url 'ecom:ProCat' %}">Here</a> to continue shopping...
-        </p>
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if not cart_items %}
+    <div class="row">
+        <div class="col-12 text-center my-5">
+            <h3>Your Cart is Empty...</h3>
+            <p>Please click <a href="{% url 'ecom:ProCat' %}">here</a> to continue shopping.</p>
+        </div>
     </div>
-</div>
-<div>
-    <div class="text-center">
-        <h3 class="text-center m-3">
-            Your Shopping cart
-        </h3>
+    {% else %}
+    <div class="row">
+        <div class="col-12 text-center my-3">
+            <h3>Your Shopping Cart</h3>
+        </div>
     </div>
     <div class="row mx-auto">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th colspan="5">
-                        Items
-                    </th>
+                    <th colspan="4">Items</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,36 +38,29 @@ cart
                 <tr>
                     <td>
                         <a href="{{ cart_item.product.get_absolute_url }}">
-
-                            <img alt="{{cart_item.product.name}}"
-                                 class="img-thumbnail float-left rounded"
-                                 src="{{cart_item.product.img.url}}">
+                            <img alt="{{ cart_item.product.name }}" class="cart-img float-left rounded"
+                                 src="{{ cart_item.product.img.url }}">
                         </a>
                     </td>
                     <td class="text-left">
-                        {{cart_item.product.name}}
-                        ABC:{{cart_item.product.id}}
-                        Price: $ {{cart_item.product.price}}
-                        <!--                        Qty: {{cart_item.product.quantity}} x {{cart_item.product.price}}-->
+                        {{ cart_item.product.name }}<br>
+                        ABC: {{ cart_item.product.id }}<br>
+                        Price: ${{ cart_item.product.price }}<br>
                         Qty: {{ cart_item.quantity }} x ${{ cart_item.product.price }}
-
                     </td>
                     <td>
-                        $ {{cart_item.sub_total}}
+                        ${{ cart_item.sub_total }}
                     </td>
-                    {% if cart_item.quantity < cart_item.product.stock %}
                     <td>
+                        {% if cart_item.quantity < cart_item.product.stock %}
                         <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa fa-plus"></i></a>
-                        <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa fa-minus"></i></a>
-                        <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa fa-trash"></i></a>
+                        <a href=""><i class="fa fa-minus"></i></a>
+                        <a href=""><i class="fa fa-trash"></i></a>
+                        {% else %}
+                        <a href=""><i class="fa fa-minus"></i></a>
+                        <a href=""><i class="fa fa-trash"></i></a>
+                        {% endif %}
                     </td>
-                    {% else %}
-                    <td>
-                        <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa fa-minus"></i></a>
-                        <a href="{% url 'cart:add_cart' cart_item.product.id %}"><i class="fa fa-trash"></i></a>
-
-                    </td>
-                    {% endif %}
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -82,25 +70,20 @@ cart
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>
-                        Checkout !
-                    </th>
+                    <th>Checkout</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>
-                        please review shopping experiance!
-                    </td>
+                    <td>Please review your shopping experience!</td>
                 </tr>
-
                 </tbody>
             </table>
             <div class="mx-auto">
-                <a class="btn btn-secondary" href="{% url 'ecom:ProCat' %}">Continue</a>
+                <a class="btn btn-secondary" href="{% url 'ecom:ProCat' %}">Continue Shopping</a>
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
-{% endif %}
 {% endblock %}
