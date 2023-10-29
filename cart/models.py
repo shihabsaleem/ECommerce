@@ -13,7 +13,7 @@ class Cart(models.Model):
         ordering = ['date_added']  # Define the default ordering based on the date_added field
 
     def __str__(self):
-        return self.cart_id  # Return a string representation of the cart (its ID)
+        return '{}'.format(self.cart_id)  # Return a string representation of the cart (its ID)
 
 
 class CartItem(models.Model):
@@ -29,4 +29,4 @@ class CartItem(models.Model):
         return self.product.price * self.quantity  # Calculate the subtotal for the cart item
 
     def __str__(self):
-        return str(self.product)  # Return a string representation of the cart item (the product's name)
+        return '{}'.format(self.product)  # Return a string representation of the cart item (the product's name)
