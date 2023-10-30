@@ -5,6 +5,6 @@ app_name = 'ecom'  # Define the application namespace
 
 urlpatterns = [
     path('', views.procat, name='ProCat'),  # Define a URL pattern for the root (homepage)
-    path('<slug:c_slug>/', views.procat, name='ProByCat'),  # Define a URL pattern for category pages
+    path('cat/<slug:c_slug>/', views.procat, name='ProByCat'),  # Define a URL pattern for category pages
     path('<slug:c_slug>/<slug:product_slug>/', views.proDetail, name='ProCatDetail'),  # Define a URL pattern for product detail pages
 ]
