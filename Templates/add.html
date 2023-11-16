@@ -1,0 +1,54 @@
+{% extends 'base.html' %}  <!-- Extend the 'base.html' template -->
+
+{% load static %}  <!-- Load the static template tags for serving static files -->
+
+{% block metadescription %}  <!-- Define the block for meta description -->
+{{ product.desc|truncatewords:155 }}  <!-- Display a truncated product description as the meta description -->
+{% endblock %}  <!-- End the block for meta description -->
+
+{% block title %}
+{% if product %}
+{{ product.name }}
+{% endif %}
+{% endblock %}  <!-- End the block for the page title -->
+
+{% block content %}  <!-- Define the block for the main content -->
+
+<div class="container-fluid m-0">
+    <div class="row m-3">
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control mt-2" name="name" placeholder="Product Name" required type="text">
+                        <input class="form-control mt-2" name="desc" placeholder="Product Description" type="text">
+                        <input class="form-control mt-2" name="price" placeholder="Product Price" required
+                               type="number">
+                        <input class="form-control mt-2" name="stock" placeholder="Product Stock" required
+                               type="number">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Add category selection -->
+                        <select class="form-control mt-2" name="category" required>
+                            <!-- Add options for categories -->
+                            {% for category in categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input class="form-control mt-2" name="img" placeholder="Product Image" type="file">
+                        <label class="mt-2">Product Availability:</label>
+                        <input checked class="mt-1" name="available" type="checkbox">
+                        <input class="form-control mt-2 btn btn-success"  type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+{% endblock %}  <!-- End the block for the main content -->
