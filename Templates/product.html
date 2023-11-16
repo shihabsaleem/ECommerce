@@ -17,7 +17,7 @@
 <div class="container-fluid m-0">
     <div class="row m-3">
         <div class="col-md-4">
-            <img alt="{{ product.name }}" class="img-fluid" src="{{ product.img.url }}" height="auto" width="350">
+            <img alt="{{ product.name }}" class="img-fluid" height="auto" src="{{ product.img.url }}" width="350">
             <!-- Display the product image -->
         </div>
         <div class="col-md-8">
@@ -30,7 +30,8 @@
             {% if product.stock <= 0 %}  <!-- Check if the product is out of stock -->
             <h5>Out of Stock</h5>  <!-- Display an "Out of Stock" message -->
             {% else %}
-            <a class="btn btn-primary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>  <!-- Display an "Add to Cart" button -->
+            <a class="btn btn-primary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+            <!-- Display an "Add to Cart" button -->
             {% endif %}
         </div>
     </div>

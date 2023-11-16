@@ -24,7 +24,7 @@ Something Else
     <div class="row">
         <div class="col-md-12">
             {% if category %}  <!-- Check if 'category' exists -->
-             <img class="img-fluid" src="{% static 'img/banner.jpeg' %}" width="100%">
+            <a href="{% url 'ecom:add' %}"><img class="img-fluid" src="{% static 'img/banner.jpeg' %}" width="100%"></a>
             <a class="btn btn-link" href="{% url 'ecom:ProCat' %}">Category</a>  <!-- Link to the category page -->
             <img alt="{{ category.name }}" class="img-fluid cat-image" src="{{ category.img.url }}">
             <!-- Display category image -->
