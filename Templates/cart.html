@@ -86,9 +86,20 @@ Cart
                 </tr>
                 </tbody>
             </table>
-            <div class="mx-auto">
-                <a class="btn btn-secondary" href="{% url 'ecom:ProCat' %}">Continue Shopping</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mx-auto">
+                        <a class="btn btn-secondary" href="{% url 'ecom:ProCat' %}">Continue Shopping</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mx-auto">
+                        <a class="btn btn-primary" href="{% url 'ecom:ProCat' %}">Make Payment</a>
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </div>
     {% endif %}
